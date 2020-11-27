@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <script type="text/javascript" src="./methods.js"></script>
+    <script type="text/javascript" src="./wordlist.js"></script>
+    <meta charset="utf-8" />
+    <title>Codenames</title>
+</head>
+<body>
+    <div id = "mainDiv" >
+        <!-- Header part -->
+        <div id = header>
+            <div id = title class=headerMember>
+                <h2 id=titleH>Codenames</h3>
+            </div>
+            <div class="headerMember">
+                <input type="button" onclick="newGame()" value="New Game" class="btnStyle"> 
+            </div>
+        </div>
+        <!-- Grid Game -->
+        <div id = gridDiv>
+            <table id=gridTable></table>
+        </div>
+        <!-- footer -->
+        <div id="footer">
+            <div class="btnsDiv">
+                <input type="button" onclick="callAI(0)" value="Red AI" class="btnRed">
+                <input type="button" onclick="reveal_hide_Color()" value="Vue Espion/Joueur" class="btnsFooter">
+                <input type="button" onclick="callAI(1)" value="Blue AI" class="btnBlue"> 
+            </div>
+            <div class="btnsDiv">
+                <textarea class="hintArea">AI's answer will be here</textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
