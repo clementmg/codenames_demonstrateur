@@ -107,8 +107,8 @@ function createGrid(){
                 this.style.backgroundColor = colorList[color];
                 distribution[word][1] = true;
 
-                if(color != currentColor && (color == 0 || color == 1)){
-                    currentColor = color;
+                if(color != currentColor && (color != 3)){
+                    // currentColor = color;
                     swapAnnonce(color);
                 }
 
@@ -119,11 +119,14 @@ function createGrid(){
 }
 
 function swapAnnonce(color){
+    if (currentColor == 0) currentColor = 1;
+    else if (currentColor == 1) currentColor = 0;
+    
     var annonce = document.getElementById("titleH");
-    if(color == 0){
+    if(currentColor == 0){
         annonce.innerHTML = "Tour des rouges";
         annonce.style.color = colorList[0];
-    } else if (color == 1){
+    } else if (currentColor == 1){
         annonce.innerHTML = "Tour des bleus";
         annonce.style.color = colorList[1];
     }
