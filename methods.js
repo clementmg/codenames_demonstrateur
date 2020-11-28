@@ -12,21 +12,24 @@ function newGame(){
     distribution = getDistribution(words); //indicating blue words, red words, assassin, neutral words
     currentColor = startColor;
 
+    // starting annoucement
     var annonce = document.getElementById("titleH");
     if (startColor == 0){
         annonce.innerHTML = "Les rouges commencent";
-        annonce.style.color = "crimson";
+        annonce.style.color = colorList[0];
     } else{
         annonce.innerHTML = "Les bleus commencent";
-        annonce.style.color = "DeepSkyBlue";
+        annonce.style.color = colorList[1];
     }
     
+    //display footer
     var hiddenContent = document.getElementById("footer");
     hiddenContent.style.display = "block";
     
     createGrid();
 }
 
+//get random words in wordlist
 function getRandomWords(){
     list = [];
     wordsClone = wordList.slice(0);
@@ -75,7 +78,7 @@ function getDistribution(words){
 function createGrid(){
     
     var table = document.getElementById('gridTable');
-    table.innerHTML = ""; // reseting
+    table.innerHTML = ""; // reseting grid
 
     for (let i = 0; i < size; i++){
 
@@ -119,10 +122,10 @@ function swapAnnonce(color){
     var annonce = document.getElementById("titleH");
     if(color == 0){
         annonce.innerHTML = "Tour des rouges";
-        annonce.style.color = "crimson";
+        annonce.style.color = colorList[0];
     } else if (color == 1){
         annonce.innerHTML = "Tour des bleus";
-        annonce.style.color = "DeepSkyBlue";
+        annonce.style.color = colorList[1];
     }
 }
 
@@ -149,14 +152,15 @@ function gameRules(){
     if((startColor == 0 && redCount >= 9) || (startColor == 1 && redCount >= 8)){
         alert("Les rouges gagnent !"); gameEnded = true;
         annonce.innerHTML = "Les rouges ont gagné";
-        annonce.style.color = "crimson";
+        annonce.style.color = colorList[0];
     }else if((startColor == 0 && blueCount >= 8) || (startColor == 1 && blueCount >= 9)){
         alert("Les bleus gagnent !"); gameEnded = true;
         annonce.innerHTML = "Les bleus ont gagné";
-        annonce.style.color = "DeepSkyBlue";
+        annonce.style.color = colorList[1];
     }
 }
 
+// spymaster view / player view
 function reveal_hide_Color(){
     if (gameRevealed) {
         gameRevealed = false;
