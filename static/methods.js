@@ -42,9 +42,9 @@ function getRandomWords(){
     return list;
 }
 
+//indicating blue words, red words, assassin, neutral words
 function getDistribution(words){
     wordL = words.slice(0);
-    //indicating blue words, red words, assassin, neutral words
     //also return start color
     // 0 : red / 1 : blue / 2 : neutral / 3 : assassin
     //dict : word[color][revealed]
@@ -199,5 +199,15 @@ function reveal_hide_Color(){
 
 function callAI(color){
     //TODO : send distribution to AI
-    alert("Not implemented yet");
+    // alert("Not implemented yet");
+    alert("called");
+    // var xhr = new XMLHttpRequest();
+    // var url = "http://127.0.0.1:5000/login"
+    // lert("didn't crash");
+    // xhr.open("POST", url, true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.send(JSON.stringify({
+    //     value: "value test"
+    // }));
+    
 }
