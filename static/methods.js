@@ -199,15 +199,25 @@ function reveal_hide_Color(){
 
 function callAI(color){
     //TODO : send distribution to AI
-    // alert("Not implemented yet");
-    alert("called");
-    // var xhr = new XMLHttpRequest();
-    // var url = "http://127.0.0.1:5000/login"
-    // lert("didn't crash");
-    // xhr.open("POST", url, true);
-    // xhr.setRequestHeader('Content-Type', 'application/json');
-    // xhr.send(JSON.stringify({
-    //     value: "value test"
-    // }));
+    // send info
+    if (gameEnded){
+        alert("La partie est terminée"); return;
+    }  
+    fetch('/hello', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            distribution
+        })
+    }).then(function (response) {
+        return response.text();
+
+    // result
+    }).then(function (result) {
+        console.log('POST response: ');
+        alert(result);
+    });
     
 }
