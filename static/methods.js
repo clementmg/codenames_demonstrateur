@@ -211,29 +211,30 @@ function callAI(color){
 
     //TODO : send distribution to AI
     // send info
-    // if (gameEnded){
-    //     alert("La partie est terminée"); return;
-    // }
-    // fetch('/hello', {
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //         distribution, color
-    //     })
-    // }).then(function (response) {
-    //     return response.text();
+    if (gameEnded){
+        alert("La partie est terminée"); return;
+    }
+    fetch('/hello', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            distribution, color
+        })
+    }).then(function (response) {
+        return response.text();
 
-    // // result
-    // }).then(function (result) {
-    //     console.log('POST response: ');
+    // result
+    }).then(function (result) {
+        console.log('POST response: ');
 
-    //     newP.innerHTML = result;
-    //     AIdiv.appendChild(newP);
-    //     // alert(result);
-    // });
+        newP.innerHTML = result;
+        AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
+        // alert(result);
+    });
     
-    newP.innerHTML = "test"
-    AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
+    // newP.innerHTML = "test"
+    // AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
+
 }

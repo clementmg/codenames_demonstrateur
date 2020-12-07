@@ -23,5 +23,5 @@
 
 .line{
     border-bottom: 2px solid #ccc;
-    display: block;
+    display: none;
 }
