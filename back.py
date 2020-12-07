@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import json
+import AI_3
+import time
+from utils import getWords
 
 app = Flask(__name__, template_folder="./static")
 
@@ -15,9 +18,16 @@ def hello():
         json_msg = request.get_json()
         # distribution = json.loads(json_msg)
         distribution = json_msg['distribution']
-        print(distribution)
+        color = json_msg['color']
+        print("COLOR IS : ", color)
+        word_to_guess, enemy_words, neutral, assassin = getWords(distribution, color)
         
-        return 'Mot indice : 3'
+        # # ---------- TEST -----------
+        start = time.time()
+        best_clue, best_score, best_g = AI_3.get_clue(word_to_guess, enemy_words, neutral, assassin)
+        finish = time.time()
+        # best_clue = "test"
+        return best_clue
 
     # GET request
     else:
@@ -26,3 +36,6 @@ def hello():
 
 if __name__ == "__main__":
     app.run()
+
+# -----------------------------------
+

@@ -202,14 +202,14 @@ function callAI(color){
     // send info
     if (gameEnded){
         alert("La partie est terminée"); return;
-    }  
+    }
     fetch('/hello', {
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST',
         body: JSON.stringify({
-            distribution
+            distribution, color
         })
     }).then(function (response) {
         return response.text();

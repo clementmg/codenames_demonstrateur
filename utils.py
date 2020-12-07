@@ -1,0 +1,25 @@
+
+
+def getWords(distrib, col):
+    # return words_to_guess, negative, neutral, assassin words
+    # color : 0 = red, 1 = blue
+    negCol = 0
+    if col == 0 : negCol = 1 
+    # elif col == 1 : negCol = 0
+    
+    toGuess, negative, neutral, assassin = [], [], [], ""
+    
+    for key in distrib : 
+        wordType = distrib[key][0]
+        if (wordType == col):
+            toGuess.append(key)
+        elif wordType == negCol :
+            negative.append(key)
+        elif wordType == 2 : 
+            neutral.append(key)
+        elif wordType == 3 : 
+            assassin = key
+    # print(distrib)
+    print(f"To guess : {toGuess}\n neg : {negative}\n neutral : {neutral}\n assassin : {assassin}")
+    return toGuess, negative, neutral, assassin
+    
