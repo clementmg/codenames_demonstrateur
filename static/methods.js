@@ -23,8 +23,11 @@ function newGame(){
     }
     
     //display footer
-    var hiddenContent = document.getElementById("footer");
-    hiddenContent.style.display = "block";
+    var hiddenContent = document.getElementsByClassName("hidden");
+    for (var i = 0; i < hiddenContent.length; i++){
+        hiddenContent[i].style.display = "block";
+    }
+    // hiddenContent.style.display = "block";
     
     createGrid();
 }
@@ -195,29 +198,42 @@ function reveal_hide_Color(){
     gameRevealed = true;
 }
 
+//
+function pass(){
+    swapAnnonce(currentColor);
+}
+
 //----------------------------------------------------
 
 function callAI(color){
+    var AIdiv = document.getElementById("AIHintArea");
+    var newP = document.createElement("p");
+
     //TODO : send distribution to AI
     // send info
-    if (gameEnded){
-        alert("La partie est terminée"); return;
-    }
-    fetch('/hello', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({
-            distribution, color
-        })
-    }).then(function (response) {
-        return response.text();
+    // if (gameEnded){
+    //     alert("La partie est terminée"); return;
+    // }
+    // fetch('/hello', {
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //         distribution, color
+    //     })
+    // }).then(function (response) {
+    //     return response.text();
 
-    // result
-    }).then(function (result) {
-        console.log('POST response: ');
-        alert(result);
-    });
+    // // result
+    // }).then(function (result) {
+    //     console.log('POST response: ');
+
+    //     newP.innerHTML = result;
+    //     AIdiv.appendChild(newP);
+    //     // alert(result);
+    // });
     
+    newP.innerHTML = "test"
+    AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
 }

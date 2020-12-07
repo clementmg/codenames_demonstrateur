@@ -1,10 +1,16 @@
-
 #mainDiv{
-    background-color: rgba(231, 227, 173, 0.979);
-    border-radius : 2em;
+    width: 70%;
+    display: flex;
+    flex-direction : row;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    height: auto;
+}
+
+#gameDiv{
+    background-color: rgba(231, 227, 173, 0.979);
+    border-radius : 2em;
+    width: 75%;
 }
 
 /* -----------------HEADER (title/btn newGame)----------------- */
@@ -83,6 +89,7 @@ td
     /* padding: 2%; */
     display: flex;
     justify-content: space-around;
+    margin-bottom: 1%;
     /* align-content: space-between; */
 }
 
@@ -132,6 +139,6 @@ td
     color: deepskyblue;
 }
 
-#footer{
+.hidden{
     display: none;
 }

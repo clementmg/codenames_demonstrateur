@@ -1,38 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="./static/style.css">
-    <script type="text/javascript" src="./static/methods.js"></script>
-    <script type="text/javascript" src="./static/wordlist.js"></script>
+    <script>
+        var rdnLoader = Math.floor(Math.random() * Math.floor(1001));
+    </script>
+    <!-- localhost -->
+    <link rel="stylesheet" href="./static/style.css?q=rdnLoader">
+    <link rel="stylesheet" href="./static/displayAI.css?q=rdnLoader">
+    <script type="text/javascript" src="./static/methods.js?q=rdnLoader"></script>
+    <script type="text/javascript" src="./static/wordlist.js?q=rdnLoader"></script>
+
+    <!-- static only -->
+    <!-- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="displayAI.css">
+    <script type="text/javascript" src="methods.js"></script>
+    <script type="text/javascript" src="wordlist.js"></script> -->
     <meta charset="utf-8" />
     <title>Codenames</title>
 </head>
 <body>
-    <div id = "mainDiv" >
-        <!-- Header part -->
-        <div id = header>
-            <div id = title class=headerMember>
-                <h2 id=titleH>Codenames</h3>
+    <div id="mainDiv">
+        <div id = "gameDiv" >
+            <!-- Header part -->
+            <div id = header>
+                <div id = title class=headerMember>
+                    <h2 id=titleH>Codenames</h3>
+                </div>
+                <div class="headerMember">
+                    <input type="button" onclick="newGame()" value="New Game" class="btnStyle"> 
+                </div>
             </div>
-            <div class="headerMember">
-                <input type="button" onclick="newGame()" value="New Game" class="btnStyle"> 
+            <!-- Grid Game -->
+            <div id = gridDiv>
+                <table id=gridTable></table>
             </div>
+            <!-- footer -->
+            <div class="hidden">
+                <div class="btnsDiv">
+                    <input type="button" onclick="pass()" value="Passer son tour" class="btnsFooter">
+                    <input type="button" onclick="reveal_hide_Color()" value="Vue Espion/Joueur" class="btnsFooter">
+                </div>
+                <div class="btnsDiv">
+                    <input type="button" onclick="callAI(0)" value="Red AI" class="btnRed">
+                    <input type="button" onclick="callAI(1)" value="Blue AI" class="btnBlue"> 
+                </div>
+            </div>
+        </div> <!-- End gameDiv -->
+        <div id = "AIdiv">
+            <p class="pAI">AI response</p>
+            <span class="line hidden"></span>
+            <div id="AIHintArea">
+
+            </div>
+            
         </div>
-        <!-- Grid Game -->
-        <div id = gridDiv>
-            <table id=gridTable></table>
-        </div>
-        <!-- footer -->
-        <div id="footer">
-            <div class="btnsDiv">
-                <input type="button" onclick="callAI(0)" value="Red AI" class="btnRed">
-                <input type="button" onclick="reveal_hide_Color()" value="Vue Espion/Joueur" class="btnsFooter">
-                <input type="button" onclick="callAI(1)" value="Blue AI" class="btnBlue"> 
-            </div>
-            <div class="btnsDiv">
-                <textarea class="hintArea">AI's answer will be here</textarea>
-            </div>
-        </div>
-    </div>
+    </div> <!-- End mainDiv -->
+    
 </body>
 </html>

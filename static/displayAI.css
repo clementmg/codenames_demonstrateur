@@ -1,0 +1,27 @@
+
+#AIdiv{
+    border:1px solid;
+    border-radius: 2em;
+    width: 24%;
+    margin-left: 1%;
+}
+
+#AIHintArea{
+    overflow-y: scroll;
+    background-color: yellow;
+}
+
+/* p balise AI title */
+.pAI{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 1.8vw;
+    font-family:Georgia,serif;
+    /* font-weight: bold;  */
+}
+
+.line{
+    border-bottom: 2px solid #ccc;
+    display: block;
+}

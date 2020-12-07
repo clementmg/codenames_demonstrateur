@@ -1,3 +1,4 @@
+print("Launching ...")
 from flask import Flask, render_template, request, jsonify
 import json
 import AI_3
@@ -23,9 +24,13 @@ def hello():
         word_to_guess, enemy_words, neutral, assassin = getWords(distribution, color)
         
         # # ---------- TEST -----------
-        start = time.time()
-        best_clue, best_score, best_g = AI_3.get_clue(word_to_guess, enemy_words, neutral, assassin)
-        finish = time.time()
+        best_clue, best_score, best_g = "", "", ""
+        try:
+            start = time.time()
+            best_clue, best_score, best_g = AI_3.get_clue(word_to_guess, enemy_words, neutral, assassin)
+            finish = time.time()
+        except :
+            best_clue = "An error occurred during AI operation"
         # best_clue = "test"
         return best_clue
 
