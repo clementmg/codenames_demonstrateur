@@ -223,12 +223,11 @@ function callAI(color){
         return response.text();
 
     // result
-    }).then(function (result) {
+    }).then(function (jsonRes) {
         // console.log('POST response: ');
-        // alert(elapsed_time)
-        // alert(result)
+        result = JSON.parse(jsonRes);
+
         insertAIRes(color, result);
-        // alert(result);
     });
     
     // newP.innerHTML = "test"
@@ -237,14 +236,37 @@ function callAI(color){
 }
 
 function insertAIRes(color, result){
+    elapsedTime = result[1]
+    var colorName = "rouge"
+    if (color == 1) colorName = "bleu"
+    // alert(result[0]["res1"])
+    // alert(result[0]["res1"][2][0])
 
+    // init
     var AIdiv = document.getElementById("AIHintArea");
-    var newP = document.createElement("p");
+    var newAIRes = document.createElement("div");
+    newAIRes.style.backgroundColor = colorList[color];
+    newAIRes.className = ("hintDiv");
+    
+    // title
+    var title = document.createElement("p");
+    title.innerHTML = "Indice de l'IA " + colorName + " trouvé en " + result[1] + " s : "
 
-    newP.style.backgroundColor = colorList[color];
-    newP.style.opacity = 0.6;
-    newP.className = ("hintDiv");
-    newP.innerHTML = result;
-    AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
+    // line
+    var line = document.createElement("span"); line.className = ("activeLine");
+    newAIRes.appendChild(title);
+    // newAIRes.appendChild(line);
+
+    // res without spoil
+    var finalRes = (Object.keys(result[0]).length - 1).toString();
+    var resWithoutSpoil = document.createElement("p");
+    // TODO : add style
+    resWithoutSpoil.innerHTML = result[0][finalRes][0] + " : " + result[0][finalRes][2].length;
+    newAIRes.appendChild(resWithoutSpoil);
+    
+    //TODO : Add every guess with score + function to hide / see
+    
+    // final insert
+    AIdiv.insertBefore(newAIRes, AIdiv.childNodes[0]);
 
 }

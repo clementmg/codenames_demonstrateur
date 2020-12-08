@@ -36,7 +36,7 @@ def hello():
         
         elapsed_time = finish - start
         
-        return json.dumps(allResults,  separators=(',', ':'))
+        return json.dumps([allResults, round(elapsed_time, 2)],  separators=(',', ':'))
         # return allResults
         
 

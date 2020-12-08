@@ -121,7 +121,8 @@ def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_
             best_clue = clue_word
             best_score = real_score
             
-            allResults[i_key] = [best_clue, np.round(best_score, 2), best_g.tolist()]
+            indice = str(i_key)
+            allResults[indice] = [best_clue, np.round(best_score, 2), best_g.tolist()]
             print("Res : ", best_clue, np.round(best_score, 2), best_g)
             i_key += 1
             
