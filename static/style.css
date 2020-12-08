@@ -5,12 +5,14 @@
     margin-left: auto;
     margin-right: auto;
     height: auto;
+    overflow: hidden;
 }
 
 #gameDiv{
     background-color: rgba(231, 227, 173, 0.979);
     border-radius : 2em;
     width: 75%;
+    overflow: hidden;
 }
 
 /* -----------------HEADER (title/btn newGame)----------------- */

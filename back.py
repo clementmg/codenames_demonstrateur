@@ -25,14 +25,20 @@ def hello():
         
         # # ---------- TEST -----------
         best_clue, best_score, best_g = "", "", ""
+        start, finish = 0, 0
+        allResults = "error"
         try:
             start = time.time()
-            best_clue, best_score, best_g = AI_3.get_clue(word_to_guess, enemy_words, neutral, assassin)
+            allResults = AI_3.get_clue(word_to_guess, enemy_words, neutral, assassin)
             finish = time.time()
         except :
-            best_clue = "An error occurred during AI operation"
-        # best_clue = "test"
-        return best_clue
+            pass
+        
+        elapsed_time = finish - start
+        
+        return json.dumps(allResults,  separators=(',', ':'))
+        # return allResults
+        
 
     # GET request
     else:

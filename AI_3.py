@@ -77,6 +77,12 @@ def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_
     print("Candidates shape : ", candidates.shape)
 
     best_clue, best_score, best_k, best_g = None, -1, 0, ()
+    
+    # ------------ added : dict
+    allResults = dict()
+    i_key = 0
+    # ------------
+    
     for clue_i, scores in enumerate(candidates.iloc[:,:len(pos_words)].values):
 
 
@@ -114,7 +120,11 @@ def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_
             best_k = len(best_g)
             best_clue = clue_word
             best_score = real_score
-
+            
+            allResults[i_key] = [best_clue, np.round(best_score, 2), best_g.tolist()]
             print("Res : ", best_clue, np.round(best_score, 2), best_g)
-    
-    return best_clue, best_score, best_g
+            i_key += 1
+            
+    # print("All res : ", allResults)
+    # return best_clue, best_score, best_g
+    return allResults

@@ -206,9 +206,6 @@ function pass(){
 //----------------------------------------------------
 
 function callAI(color){
-    var AIdiv = document.getElementById("AIHintArea");
-    var newP = document.createElement("p");
-
     //TODO : send distribution to AI
     // send info
     if (gameEnded){
@@ -227,14 +224,27 @@ function callAI(color){
 
     // result
     }).then(function (result) {
-        console.log('POST response: ');
-
-        newP.innerHTML = result;
-        AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
+        // console.log('POST response: ');
+        // alert(elapsed_time)
+        // alert(result)
+        insertAIRes(color, result);
         // alert(result);
     });
     
     // newP.innerHTML = "test"
     // AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
+
+}
+
+function insertAIRes(color, result){
+
+    var AIdiv = document.getElementById("AIHintArea");
+    var newP = document.createElement("p");
+
+    newP.style.backgroundColor = colorList[color];
+    newP.style.opacity = 0.6;
+    newP.className = ("hintDiv");
+    newP.innerHTML = result;
+    AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
 
 }

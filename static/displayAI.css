@@ -4,11 +4,17 @@
     border-radius: 2em;
     width: 24%;
     margin-left: 1%;
+    overflow: hidden;
 }
 
 #AIHintArea{
-    overflow-y: scroll;
-    background-color: yellow;
+    width: 98%;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding : 0 1% 0 1%;
+    
 }
 
 /* p balise AI title */
@@ -23,5 +29,20 @@
 
 .line{
     border-bottom: 2px solid #ccc;
+    display: none;
+}
+
+.hintDiv{
+    /* margin-top: 1vw; */
+    overflow-x: auto;
+    border: 1px dashed;
+    border-radius: 1em;
+    color: rgb(255, 255, 255);
+    padding: 2%;
+    /* display : block; */
+    /* Color regarding AI's color */
+}
+
+.resHidden{
     display: none;
 }
