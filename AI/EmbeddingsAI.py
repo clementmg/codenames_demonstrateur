@@ -3,16 +3,18 @@ import random
 import numpy as np
 import pickle
 import pandas as pd
+from AI.db_download import BDD 
 
 nlp = spacy.load("fr_core_news_lg")
+
 from nltk import PorterStemmer
 st = PorterStemmer()
 
-with open("database/word_database.pkl", "rb") as f:
-    BDD = pickle.load(f)
+# with open(BDD, "rb") as f:
+#     BDD = pickle.load(f)
     
-# with open("wordlist.pkl", 'rb') as f:
-#     lst = pickle.load(f)
+with open("database/wordlist.pkl", 'rb') as f:
+    lst = pickle.load(f)
      
 all_words = np.array(list(BDD.values()))
 
