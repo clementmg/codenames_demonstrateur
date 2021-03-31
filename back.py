@@ -1,7 +1,8 @@
 print("Launching ...")
 from flask import Flask, render_template, request, jsonify
 import json
-import AI_3
+from AI import AI_3
+from AI import EmbeddingsAI
 import time
 from utils import getWords
 
@@ -11,8 +12,8 @@ app = Flask(__name__, template_folder="./static")
 def test():
     return render_template("index.html")
 
-@app.route('/hello', methods=['GET', 'POST'])
-def hello():
+@app.route('/ai3', methods=['GET', 'POST'])
+def callAi():
     # POST request
     if request.method == 'POST':
         
@@ -24,12 +25,12 @@ def hello():
         word_to_guess, enemy_words, neutral, assassin = getWords(distribution, color)
         
         # # ---------- TEST -----------
-        best_clue, best_score, best_g = "", "", ""
+        # best_clue, best_score, best_g = "", "", ""
         start, finish = 0, 0
         allResults = "error"
         try:
             start = time.time()
-            allResults = AI_3.get_clue(word_to_guess, enemy_words, neutral, assassin)
+            allResults = EmbeddingsAI.get_clue(word_to_guess, enemy_words, neutral, assassin)
             finish = time.time()
         except :
             pass
