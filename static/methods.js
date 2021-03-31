@@ -6,6 +6,9 @@ var size = 25;
 var currentColor;
 
 function newGame(){
+    var AIdiv = document.getElementById("AIHintArea");
+    AIdiv.innerHTML = "";
+
     gameRevealed = false;
     gameEnded = false;
     words = getRandomWords(); //return the 25 words that will be used
@@ -211,7 +214,7 @@ function callAI(color){
     if (gameEnded){
         alert("La partie est terminée"); return;
     }
-    fetch('/hello', {
+    fetch('/ai3', {
         headers: {
           'Content-Type': 'application/json'
         },

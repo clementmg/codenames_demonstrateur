@@ -8,8 +8,11 @@ nlp = spacy.load("fr_core_news_lg")
 from nltk import PorterStemmer
 st = PorterStemmer()
 
-with open("database/BDD4.pkl", "rb") as f:
+with open("database/word_database.pkl", "rb") as f:
     BDD = pickle.load(f)
+    
+# with open("wordlist.pkl", 'rb') as w:
+#     lst = pickle.load(w)
     
 all_words = np.array(list(BDD.values()))
 
@@ -26,13 +29,13 @@ def is_stopwords(w, lst_words):
         return False
     return True
 
-def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_coeff=1.1, agg=0.1):
-
+def get_clue(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, agg=0.05, topn=50000, given_indices=[]):
+    
     #vectorize words
-    pos_vecs = [nlp.vocab.get_vector(w) for w in pos_words]
-    neg_vecs = [nlp.vocab.get_vector(w) for w in neg_words]
-    neu_vecs = [nlp.vocab.get_vector(w) for w in neu_words]
-    ass_vec = nlp.vocab.get_vector(assassin_word)
+    pos_vecs = [nlp.vocab.get_vector(str(w)) for w in pos_words]
+    neg_vecs = [nlp.vocab.get_vector(str(w)) for w in neg_words]
+    neu_vecs = [nlp.vocab.get_vector(str(w)) for w in neu_words]
+    ass_vec = nlp.vocab.get_vector(str(assassin_word))
 
     #get n_best candidates with the highest min scalar product
     #get pos_words scores
@@ -49,7 +52,7 @@ def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_
     neu_df = pd.DataFrame(nw, index=BDD.keys())
     ass_df = pd.DataFrame(aw, index=BDD.keys())
 
-    for w in pos_words:
+    for w in np.concatenate([pos_words, given_indices]):
         if w in BDD.keys():
             df.drop(w, inplace=True)
             neg_df.drop(w, inplace=True)
@@ -58,7 +61,7 @@ def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_
 
     #filter
     df["top"] = df.apply(lambda x: np.sort(x)[-1:], axis=1)
-    threshold = np.sort(df.top)[::-1][:topn][-1]
+    threshold = np.sort(df.top)[::-1][:topn][-1][0]
     max_len = 1
 
     if len(pos_words) > 1:
@@ -66,15 +69,15 @@ def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_
         df["top"] = df.apply(lambda x: np.sort(x)[-2:].min(), axis=1)
         threshold = np.sort(df.top)[::-1][:topn][-1]
         max_len = 2
-
+    
     df["is_top"] = df.top >= threshold
-    df["neg_filter"] = df["top"] > max_len*danger_coeff*neg_df.max(axis=1)
-    df["neu_filter"] = df["top"] > max_len*neu_df.max(axis=1)
-    df["ass_filter"] = df["top"] > max_len*danger_coeff*ass_df.max(axis=1)
+    df["neg_filter"] = df["top"] > danger_coeff*neg_df.max(axis=1)
+    df["neu_filter"] = df["top"] > 1.2*neu_df.max(axis=1)
+    df["ass_filter"] = df["top"] > danger_coeff*ass_df.max(axis=1)
 
     candidates = df.loc[df.is_top].loc[df.neu_filter].loc[df.neg_filter].loc[df.ass_filter]       
     
-    print("Candidates shape : ", candidates.shape)
+    # print("Candidates shape : ", candidates.shape)
 
     best_clue, best_score, best_k, best_g = None, -1, 0, ()
     
@@ -114,13 +117,14 @@ def get_clue(pos_words, neg_words, neu_words, assassin_word, topn=10000, danger_
         real_score = max(groups_score)
 
         if real_score > best_score:
-                #update
+            #update
             ind = groups[np.argmax(groups_score)]
             best_g = np.array(pos_words)[ind]
             best_k = len(best_g)
             best_clue = clue_word
             best_score = real_score
             
+            # added to get result
             indice = str(i_key)
             allResults[indice] = [best_clue, np.round(best_score, 2), best_g.tolist()]
             print("Res : ", best_clue, np.round(best_score, 2), best_g)
