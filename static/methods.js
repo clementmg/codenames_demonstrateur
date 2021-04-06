@@ -227,23 +227,26 @@ function callAI(color){
 
     // result
     }).then(function (jsonRes) {
-        // console.log('POST response: ');
         result = JSON.parse(jsonRes);
-
-        insertAIRes(color, result);
+  
+        // return result;
+        insertAIRes(color, result)
     });
-    
-    // newP.innerHTML = "test"
-    // AIdiv.insertBefore(newP, AIdiv.childNodes[0]);
 
 }
 
-function insertAIRes(color, result){
+function insertAIRes(color, results){
+    
+    for (var i = 0; results.length; i++){
+        result = results[i]
+        createDiv(color, result)
+    }
+}
+
+function createDiv(color, result){
     elapsedTime = result[1]
     var colorName = "rouge"
     if (color == 1) colorName = "bleu"
-    // alert(result[0]["res1"])
-    // alert(result[0]["res1"][2][0])
 
     // init
     var AIdiv = document.getElementById("AIHintArea");
@@ -271,5 +274,4 @@ function insertAIRes(color, result){
     
     // final insert
     AIdiv.insertBefore(newAIRes, AIdiv.childNodes[0]);
-
 }

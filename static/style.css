@@ -1,6 +1,6 @@
 
 #mainDiv{
-    width: 70%;
+    width: 90%;
     height: 20%;
     display: flex;
     flex-direction : row;
@@ -13,7 +13,7 @@
 #gameDiv{
     background-color: rgba(231, 227, 173, 0.979);
     border-radius : 2em;
-    width: 75%;
+    width: 60%;
     overflow: hidden;
 }
 

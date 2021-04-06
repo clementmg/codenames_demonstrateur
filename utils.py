@@ -24,3 +24,6 @@ def getWords(distrib, col):
     print(f"To guess : {toGuess}\n neg : {negative}\n neutral : {neutral}\n assassin : {assassin}")
     return toGuess, negative, neutral, assassin
     
+def getColorName(int_):
+    if int_ == 0: return "red"
+    else : return "blue"
