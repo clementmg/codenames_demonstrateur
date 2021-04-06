@@ -9,10 +9,13 @@ from utils import getWords
 app = Flask(__name__, template_folder="./static")
 
 @app.route("/")
+def index():
+    return render_template("index.html")
+
 @app.route('/ai3', methods=['GET', 'POST'])
 def callAi():
     # POST request
-    if request.method == 'POST' or request.method == "GET":
+    if request.method == 'POST':
         
         json_msg = request.get_json()
         # distribution = json.loads(json_msg)
@@ -39,9 +42,9 @@ def callAi():
         
 
     # GET request
-    # else:
-    #     message = {'test':'Hello !'}
-    #     return jsonify(message)
+    else:
+        message = {'test':'Hello !'}
+        return jsonify(message)
 
 if __name__ == "__main__":
     # port = int(os.environ.get("PORT", 8000))
