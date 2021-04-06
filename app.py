@@ -9,9 +9,6 @@ from utils import getWords
 app = Flask(__name__, template_folder="./static")
 
 @app.route("/")
-def test():
-    return render_template("index.html")
-
 @app.route('/ai3', methods=['GET', 'POST'])
 def callAi():
     # POST request
@@ -47,9 +44,9 @@ def callAi():
         return jsonify(message)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
-    # app.run()
+    # port = int(os.environ.get("PORT", 8000))
+    # app.run(host="0.0.0.0")
+    app.run()
 
 # -----------------------------------
 
