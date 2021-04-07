@@ -32,7 +32,7 @@ def is_stopwords(w, lst_words):
     return True
 
 # @njit
-def get_clue2(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, agg=0.05, topn=50000, given_indices=[]):
+def get_clue1(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, agg=0.05, topn=50000, given_indices=[]):
     
     #vectorize words
     pos_vecs = [nlp.vocab.get_vector(str(w)) for w in pos_words]   # Shape (8, 300)

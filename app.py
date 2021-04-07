@@ -15,11 +15,9 @@ def index():
 
 @app.route('/ai3', methods=['GET', 'POST'])
 def callAi():
-    # POST request
     if request.method == 'POST':
         
         json_msg = request.get_json()
-        # distribution = json.loads(json_msg)
         distribution = json_msg['distribution']
         color = json_msg['color']
         # ai = json_msg['ai']
@@ -27,22 +25,14 @@ def callAi():
         word_to_guess, enemy_words, neutral, assassin = getWords(distribution, color)
         
         # # ---------- TEST -----------
-        # best_clue, best_score, best_g = "", "", ""
-        start, finish = 0, 0
         allResults = "error"
-        # try:
-            # allResults = EmbeddingsAI.get_clue(word_to_guess, enemy_words, neutral, assassin)
         allResults = AI_manager(word_to_guess, enemy_words, neutral, assassin)
-        # except :
-        #     pass
-        print("WAOZSHOWAUZHDOU : ", allResults)
-        return json.dumps(allResults,  separators=(',', ':'))
-        # return allResults
-        
 
-    # GET request
+        return json.dumps(allResults,  separators=(',', ':'))
+        
+    # default get request
     else:
-        message = {'test':'Hello !'}
+        message = {'nothing to see'}
         return jsonify(message)
 
 if __name__ == "__main__":
