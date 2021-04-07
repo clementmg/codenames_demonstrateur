@@ -78,10 +78,8 @@ td
 }
 
 .btn{
-    /* background-color: rgb(219, 233, 228); */
     display: block;
     font-size: 1.5vw;
-    /* height: 4em; */
     font-family:Georgia,serif;
     padding : 25% 0 25% 0 ;
 }
@@ -90,11 +88,9 @@ td
 
 .btnsDiv{
     width: 100%;
-    /* padding: 2%; */
     display: flex;
     justify-content: space-around;
     margin-bottom: 1%;
-    /* align-content: space-between; */
 }
 
 .btnsFooter{
@@ -118,22 +114,24 @@ td
 }
 
 .btnRed{
-    background: none;
-    /* border: none; */
-    cursor: pointer;
-    line-height: 1.5;
-    font: 700 1.3rem 'Georgia', sans-serif;
-    border-radius: 1em;
-    font-size:1.5vw;;
-}
-.btnBlue{
-    background: none;
+    background: lightcoral;
     /* border: none; */
     cursor: pointer;
     line-height: 1.5;
     font: 700 1.3rem 'Georgia', sans-serif;
     border-radius: 1em;
     font-size:1.5vw;
+    margin : 5% 1% 5% 0;
+}
+.btnBlue{
+    background: lightblue;
+    /* border: none; */
+    cursor: pointer;
+    line-height: 1.5;
+    font: 700 1.3rem 'Georgia', sans-serif;
+    border-radius: 1em;
+    font-size:1.5vw;
+    margin : 5% 1% 5% 0;
 }
 
 .btnRed:hover{

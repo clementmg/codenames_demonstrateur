@@ -208,7 +208,7 @@ function pass(){
 
 //----------------------------------------------------
 
-function callAI(color){
+function callAI(color, ai){
     //TODO : send distribution to AI
     // send info
     if (gameEnded){
@@ -220,7 +220,7 @@ function callAI(color){
         },
         method: 'POST',
         body: JSON.stringify({
-            distribution, color
+            distribution, color, ai
         })
     }).then(function (response) {
         return response.text();

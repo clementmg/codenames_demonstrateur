@@ -16,20 +16,20 @@ def index():
 @app.route('/ai3', methods=['GET', 'POST'])
 def callAi():
     if request.method == 'POST':
-        
+
         json_msg = request.get_json()
         distribution = json_msg['distribution']
         color = json_msg['color']
-        # ai = json_msg['ai']
+        ai = json_msg['ai']
         print("------------ Called for color : ", getColorName(color))
         word_to_guess, enemy_words, neutral, assassin = getWords(distribution, color)
-        
+
         # # ---------- TEST -----------
         allResults = "error"
-        allResults = AI_manager(word_to_guess, enemy_words, neutral, assassin)
+        allResults = AI_manager(ai, word_to_guess, enemy_words, neutral, assassin)
 
         return json.dumps(allResults,  separators=(',', ':'))
-        
+
     # default get request
     else:
         message = {'nothing to see'}

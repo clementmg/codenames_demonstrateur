@@ -42,28 +42,32 @@
                     <input type="button" onclick="pass()" value="Passer son tour" class="btnsFooter">
                     <input type="button" onclick="reveal_hide_Color()" value="Vue Espion/Joueur" class="btnsFooter">
                 </div>
-                <div class="btnsDiv">
+                <!-- <div class="btnsDiv">
                     <input type="button" onclick="callAI(0)" value="Red AI" class="btnRed">
                     <input type="button" onclick="callAI(1)" value="Blue AI" class="btnBlue"> 
-                </div>
+                </div> -->
             </div>
         </div> <!-- End gameDiv -->
-        <div id = "AIdiv">
-            <p class="pAI">AI Response</p>
-            <span class="line hidden"></span>
-            <div id="AIHintArea">
-                <!-- <div class="hintDiv">test</div> -->
-                <template id="AIResTemplate" class="hintDiv resHidden">
-                    
-                </template>
+        <div id = "AIcontainer"> <!-- AI div -->
+            <div class = "AIdiv"> <!-- Embeddings AI -->
+                <div class = "AImenu">
+                    <p class="pAI">Embeddings AI</p>
+                    <input type="button" onclick="callAI(0, '1')" value="Red AI" class="btnRed">
+                    <input type="button" onclick="callAI(1, '1')" value="Blue AI" class="btnBlue">
+                </div>
+                <span class="line hidden"></span>
+                <div id="AIHintArea"></div>
+            </div> 
+            <div class = "AIdiv"> <!-- Lexical AI -->
+                <div class = "AImenu">
+                    <p class="pAI">Lexical AI</p>
+                    <input type="button" onclick="callAI(0, '2')" value="Red AI" class="btnRed">
+                    <input type="button" onclick="callAI(1, '2')" value="Blue AI" class="btnBlue">
+                </div>
+                <span class="line hidden"></span>
             </div>
-            
-        </div> <!-- End AIdiv -->
-        <div id = "DetailsDiv"> <!-- DetailsDiv -->
-            <p class="pAI">AI Details</p>
-            <span class="line hidden"></span>
-        </div>
+        </div> <!-- End AI div -->
     </div> <!-- End mainDiv -->
-    
+
 </body>
 </html>

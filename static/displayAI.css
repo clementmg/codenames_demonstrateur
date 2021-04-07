@@ -1,9 +1,10 @@
-#AIdiv{
+.AIdiv{
     border:1px solid;
     border-radius: 2em;
-    width: 19%;
-    margin-left: 1%;
+    width: 100%;
     overflow: hidden;
+    margin-bottom: 0.5%;
+    height: 50%;
 }
 
 #AIHintArea{
@@ -11,10 +12,7 @@
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     padding : 0 1% 0 1%;
-    /* background-color: red; */
-    
 }
 
 /* p balise AI title */
@@ -24,7 +22,6 @@
     text-align: center;
     font-size: 1.8vw;
     font-family:Georgia,serif;
-    /* font-weight: bold;  */
 }
 
 .line{
@@ -37,7 +34,6 @@
 }
 
 .hintDiv{
-    /* margin-top: 1vw; */
     justify-content : space-around;
     overflow-x: auto;
     border: 1px dashed;
@@ -48,8 +44,6 @@
     font-weight: bold;
     margin-top: 1%;
     padding: 0 1% 0 1%;
-    /* display : block; */
-    /* Color regarding AI's color */
 }
 
 .resHidden{

@@ -10,14 +10,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import pairwise
 from sklearn.cluster import KMeans
 from collections import Counter
+from numba import jit
 
 with open("database/wordlist.pkl", "rb") as f:
     words = pickle.load(f)
     
 with open("database/word_lexicals.pkl", "rb") as f:
     texts = pickle.load(f)
-
-# df = pd.read_excel("Lexique383.xlsb", engine='pyxlsb')
     
 nlp = spacy.load("fr_core_news_lg")
 
@@ -154,7 +153,9 @@ def get_clue2(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.2, 
     
     fres = dict()
     for i in range(len(results)):
+        print(results[i])
         fres[i] = results[i]
-            
+    
     return fres
+    
     # return best_clue, best_score, words_to_guess

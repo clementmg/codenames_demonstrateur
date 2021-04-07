@@ -1,7 +1,20 @@
-#DetailsDiv{
+/* #DetailsDiv{
     border:1px solid;
     border-radius: 2em;
     width: 19%;
     margin-left: 1%;
    
+} */
+
+#AIcontainer{
+    width : 39%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0.5% 0 0.5%;
+}
+
+/* containing Ai names, buttons and scroll */
+.AImenu{
+    display: flex;
+    flex-direction: row;
 }
