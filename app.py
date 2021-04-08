@@ -1,7 +1,6 @@
 print("Launching ...")
 from flask import Flask, render_template, request, jsonify
 import json
-from AI import AI_3
 from AI import EmbeddingsAI
 import time
 from utils import getWords, getColorName
@@ -27,8 +26,9 @@ def callAi():
         # # ---------- TEST -----------
         allResults = "error"
         allResults = AI_manager(ai, word_to_guess, enemy_words, neutral, assassin)
-
-        return json.dumps(allResults,  separators=(',', ':'))
+        print("================= Information sent =================")
+        print(allResults[0])
+        return json.dumps(allResults[0],  separators=(',', ':'))
 
     # default get request
     else:

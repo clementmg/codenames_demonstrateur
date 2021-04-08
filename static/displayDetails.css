@@ -1,11 +1,3 @@
-/* #DetailsDiv{
-    border:1px solid;
-    border-radius: 2em;
-    width: 19%;
-    margin-left: 1%;
-   
-} */
-
 #AIcontainer{
     width : 39%;
     display: flex;
@@ -17,4 +9,48 @@
 .AImenu{
     display: flex;
     flex-direction: row;
+}
+
+.AnnonceDiv{
+    display: flex;
+    flex-direction: row;
+    padding : 1%;
+}
+
+.Annonce{
+    font-size:1.1vw;
+    width : 84%;
+    text-align : center;
+}
+
+.buttonAnnonce{
+    width: 14%;
+    margin: 0 1% 0 1%;
+    cursor: pointer;
+    line-height: 1.5;
+    font: 700 1.3rem 'Georgia', sans-serif;
+    border-radius: 1em;
+    font-size:1.1vw;
+}
+
+li{
+    background-color: lightcoral;
+}
+
+#EmbeddingsZone{
+    width: 100%;
+    height: 100%;
+}
+
+#EmbeddingsDetails{
+
+}
+
+#EmbeddingsAnnonce{
+
+}
+
+#LexicalZone{
+    width: 100%;
+    height: 100%;
 }

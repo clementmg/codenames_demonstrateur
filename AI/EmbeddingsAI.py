@@ -93,8 +93,8 @@ def get_clue1(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, 
     best_clue, best_score, best_k, best_g = None, -1, 0, ()
     
     # ------------ added : dict
-    allResults = dict()
-    i_key = 0
+    allResults = []
+    # i_key = 0
     # ------------
     
     for clue_i, scores in enumerate(candidates.iloc[:,:len(pos_words)].values):
@@ -136,10 +136,11 @@ def get_clue1(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, 
             best_score = real_score
             
             # added to get result
-            indice = str(i_key)
-            allResults[indice] = [best_clue, np.round(best_score, 2), best_g.tolist()]
+            # indice = str(i_key)
+            allResults.append([best_clue, np.round(best_score, 2), best_g.tolist()])
+            # allResults[indice] = [best_clue, np.round(best_score, 2), best_g.tolist()]
             print("Res : ", best_clue, np.round(best_score, 2), best_g)
-            i_key += 1
+            # i_key += 1
 
     candidates = candidates.sort_values(by=['top'], ascending = False)
     

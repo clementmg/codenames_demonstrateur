@@ -1,4 +1,5 @@
 var colorList = ["Crimson", "DeepSkyBlue", "Linen", "DimGrey"]
+var lightColorList = ["lightcoral", "lightblue"]
 var startColor;
 var gameRevealed = false;
 var gameEnded = false;
@@ -6,8 +7,8 @@ var size = 25;
 var currentColor;
 
 function newGame(){
-    var AIdiv = document.getElementById("AIHintArea");
-    AIdiv.innerHTML = "";
+    // var AIdiv = document.getElementById("EmbeddingsZone");
+    // AIdiv.innerHTML = "";
 
     gameRevealed = false;
     gameEnded = false;
@@ -228,11 +229,48 @@ function callAI(color, ai){
     // result
     }).then(function (jsonRes) {
         result = JSON.parse(jsonRes);
-  
+
         // return result;
-        insertAIRes(color, result)
+        // insertAIRes(color, result)
+        populateResult(color, result, ai);
     });
 
+}
+
+// Populate results zone
+// + add global list to store results
+function populateResult(color, result, ai){
+
+    // variables
+    var ai = parseInt(ai);
+    var colorName = "rouge";
+    if (color == 1) colorName = "bleu";
+    var resultsZone = document.getElementById("EmbeddingsZone");
+    var annonce = document.getElementById("EmbeddingsAnnonce");
+    var ol = document.getElementById("olEmbeddings");
+
+    if (ai == 2){
+        resultsZone = document.getElementById("LexicalZone");
+        var annonce = document.getElementById("LexicalAnnonce");
+        var ol = document.getElementById("olLexical");
+    }
+
+    resultsZone.style.backgroundColor = lightColorList[color];
+    // var finalRes = (Object.keys(result[0]).length - 1).toString();
+
+    var time = result[1]
+    annonce.innerHTML = "Indice "+colorName+" en " + time+"s : "+ result[0][0][0]+" - "
+        +result[0][0][2].length + " mot(s)";
+    // annonce.innerHTML = "Indice " + color + " trouvé en " + result[1] + " s : " + " : " + result[0][finalRes][0] + " : " + result[0][finalRes][2].length;
+
+    ol.innerHTML = "";
+    
+    for(var i = 0; i < result.length; i++){
+        if(i >= 5) break;
+        
+    }
+    
+    
 }
 
 function insertAIRes(color, results){
@@ -249,7 +287,7 @@ function createDiv(color, result){
     if (color == 1) colorName = "bleu"
 
     // init
-    var AIdiv = document.getElementById("AIHintArea");
+    var AIdiv = document.getElementById("EmbeddingsZone");
     var newAIRes = document.createElement("div");
     newAIRes.style.backgroundColor = colorList[color];
     newAIRes.className = ("hintDiv");

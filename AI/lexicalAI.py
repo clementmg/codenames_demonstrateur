@@ -151,11 +151,12 @@ def get_clue2(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.2, 
         #     words_to_guess = np.array(pos_words)[word_ind]
         #     #print(f"clue: {best_clue}, words: {words_to_guess}, score:{best_score}")
     
-    fres = dict()
-    for i in range(len(results)):
-        print(results[i])
-        fres[i] = results[i]
-    
-    return fres
+    # fres = dict()
+    # for i in range(len(results)):
+    #     print(results[i])
+    #     fres[i] = results[i]
+ 
+    results.reverse()
+    return results
     
     # return best_clue, best_score, words_to_guess
