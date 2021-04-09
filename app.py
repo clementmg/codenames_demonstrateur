@@ -23,7 +23,7 @@ def callAi():
         print("------------ Called for color : ", getColorName(color))
         word_to_guess, enemy_words, neutral, assassin = getWords(distribution, color)
 
-        # # ---------- TEST -----------
+        # Create message to be returned
         allResults = "error"
         allResults = AI_manager(ai, word_to_guess, enemy_words, neutral, assassin)
         print("================= Information sent =================")
@@ -36,9 +36,5 @@ def callAi():
         return jsonify(message)
 
 if __name__ == "__main__":
-    # port = int(os.environ.get("PORT", 8000))
-    # app.run(host="0.0.0.0")
     app.run()
-
-# -----------------------------------
 

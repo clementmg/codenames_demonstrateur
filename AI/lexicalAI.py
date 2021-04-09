@@ -57,7 +57,6 @@ def get_score_df(pos, neg, neu, assassin, indices, danger_coeff):
     #build result df, containing candidate and their scores (positive and negative)
     df = pd.DataFrame(pos_dist, index=all_words_candidate)
     #compute a score for each row (a candidate)
-    #df["score"] = df.apply(lambda x: np.product(x) / np.sum(x), axis=1)
     
     df["neg"] = np.max(neg_dist, axis=1) * danger_coeff
     if len(neu) > 0:
@@ -145,18 +144,5 @@ def get_clue2(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.2, 
             new_c = [candidate, np.round(real_score, 3), (np.array(pos_words)[word_ind]).tolist()]
             results.append(new_c)
         
-        # if real_score > best_score:
-        #     best_clue = candidate
-        #     best_score = real_score
-        #     words_to_guess = np.array(pos_words)[word_ind]
-        #     #print(f"clue: {best_clue}, words: {words_to_guess}, score:{best_score}")
-    
-    # fres = dict()
-    # for i in range(len(results)):
-    #     print(results[i])
-    #     fres[i] = results[i]
- 
     results.reverse()
     return results
-    
-    # return best_clue, best_score, words_to_guess

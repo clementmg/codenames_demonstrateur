@@ -11,9 +11,6 @@ st = PorterStemmer()
 
 with open("database/word_database.pkl", "rb") as f:
     BDD = pickle.load(f)
-    
-# with open("database/wordlist.pkl", 'rb') as f:
-#     lst = pickle.load(f)
      
 all_words = np.array(list(BDD.values()))
 
@@ -75,9 +72,7 @@ def get_clue1(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, 
         #get a top 2
         df["top"] = df.apply(lambda x: np.sort(x)[-2:].min(), axis=1)
         threshold = np.sort(df.top)[::-1][:topn][-1]
-        max_len = 2
-
-        
+        max_len = 2  
     
     df["is_top"] = df.top >= threshold
     df["neg_filter"] = df["top"] > danger_coeff*neg_df.max(axis=1)
@@ -92,20 +87,15 @@ def get_clue1(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, 
 
     best_clue, best_score, best_k, best_g = None, -1, 0, ()
     
-    # ------------ added : dict
+    # -storing results
     allResults = []
-    # i_key = 0
-    # ------------
     
     for clue_i, scores in enumerate(candidates.iloc[:,:len(pos_words)].values):
-
-
         #transform clue_i into the actual word
         clue_word = candidates.index[clue_i]
 
         if not is_stopwords(clue_word, pos_words):
             continue
-        
 
         # Order scores by lowest to highest inner product with the clue.
         ss = sorted((s, i) for i, s in enumerate(scores))
@@ -136,15 +126,11 @@ def get_clue1(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, 
             best_score = real_score
             
             # added to get result
-            # indice = str(i_key)
             allResults.append([best_clue, np.round(best_score, 2), best_g.tolist()])
-            # allResults[indice] = [best_clue, np.round(best_score, 2), best_g.tolist()]
             print("Res : ", best_clue, np.round(best_score, 2), best_g)
-            # i_key += 1
 
     candidates = candidates.sort_values(by=['top'], ascending = False)
     
-    # return best_clue, best_score, best_g, candidates
     allResults.reverse()
     return allResults
 

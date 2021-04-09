@@ -4,7 +4,6 @@ def getWords(distrib, col):
     # color : 0 = red, 1 = blue
     negCol = 0
     if col == 0 : negCol = 1 
-    # elif col == 1 : negCol = 0
     
     toGuess, negative, neutral, assassin = [], [], [], ""
     
@@ -20,7 +19,7 @@ def getWords(distrib, col):
             neutral.append(key.lower())
         elif wordType == 3 : 
             assassin = key.lower()
-    # print(distrib)
+
     print(f"To guess : {toGuess}\n neg : {negative}\n neutral : {neutral}\n assassin : {assassin}")
     return toGuess, negative, neutral, assassin
     

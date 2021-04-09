@@ -8,6 +8,7 @@ var size = 25;
 var currentColor;
 
 function newGame(){
+    addAIscreen();
     gameRevealed = false;
     gameEnded = false;
     words = getRandomWords(); //return the 25 words that will be used
@@ -31,6 +32,15 @@ function newGame(){
     }
     
     createGrid();
+}
+
+function addAIscreen(){
+    var main = document.getElementById('mainDiv');
+    var game = document.getElementById('gameDiv');
+    main.style.width = '90%';
+    main.style.marginLeft = '5%';
+    main.style.flexDirection = 'row';
+    game.style.margin = '0';
 }
 
 //get random words in wordlist
@@ -102,7 +112,7 @@ function createGrid(){
         //click function
         td.onclick = (function(){
             return function(){
-                if(distribution[word][1] == true) return; // si la carte est déjà révélée
+                if(distribution[word][1] == true) return; // if already revealed
 
                 if (gameEnded == true){
                     alert("Cette partie est terminée."); return;
@@ -111,7 +121,6 @@ function createGrid(){
                 distribution[word][1] = true;
 
                 if(color != currentColor && (color != 3)){
-                    // currentColor = color;
                     swapAnnonce(color);
                 }
 
