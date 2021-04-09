@@ -10,7 +10,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import pairwise
 from sklearn.cluster import KMeans
 from collections import Counter
-from numba import jit
 
 with open("database/wordlist.pkl", "rb") as f:
     words = pickle.load(f)
