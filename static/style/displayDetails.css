@@ -31,10 +31,15 @@
     font: 700 1.3rem 'Georgia', sans-serif;
     border-radius: 1em;
     font-size:1.1vw;
+    display: 'none';
+}
+
+.buttonAnnonce:hover{
+    color : rgb(253, 253, 253);
 }
 
 li{
-    background-color: lightcoral;
+    font-size: 1.1vw;
 }
 
 #EmbeddingsZone{
@@ -42,12 +47,9 @@ li{
     height: 100%;
 }
 
-#EmbeddingsDetails{
-
-}
-
-#EmbeddingsAnnonce{
-
+.details{
+    display : 'none';
+    padding-left: 7%;
 }
 
 #LexicalZone{

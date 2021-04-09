@@ -1,4 +1,5 @@
-var colorList = ["Crimson", "DeepSkyBlue", "Linen", "DimGrey"]
+var baseColorList = ["Crimson", "DeepSkyBlue", "Linen", "DimGrey"]
+var colorList = ["lightcoral", "lightblue", "Linen", "DimGrey"]
 var lightColorList = ["lightcoral", "lightblue"]
 var startColor;
 var gameRevealed = false;
@@ -7,9 +8,6 @@ var size = 25;
 var currentColor;
 
 function newGame(){
-    // var AIdiv = document.getElementById("EmbeddingsZone");
-    // AIdiv.innerHTML = "";
-
     gameRevealed = false;
     gameEnded = false;
     words = getRandomWords(); //return the 25 words that will be used
@@ -20,10 +18,10 @@ function newGame(){
     var annonce = document.getElementById("titleH");
     if (startColor == 0){
         annonce.innerHTML = "Les rouges commencent";
-        annonce.style.color = colorList[0];
+        annonce.style.color = baseColorList[0];
     } else{
         annonce.innerHTML = "Les bleus commencent";
-        annonce.style.color = colorList[1];
+        annonce.style.color = baseColorList[1];
     }
     
     //display footer
@@ -31,7 +29,6 @@ function newGame(){
     for (var i = 0; i < hiddenContent.length; i++){
         hiddenContent[i].style.display = "block";
     }
-    // hiddenContent.style.display = "block";
     
     createGrid();
 }
@@ -54,7 +51,6 @@ function getDistribution(words){
     wordL = words.slice(0);
     //also return start color
     // 0 : red / 1 : blue / 2 : neutral / 3 : assassin
-    //dict : word[color][revealed]
     let rdn1 = Math.floor(Math.random() * Math.floor(2));
     startColor = rdn1;
     let secondColor;
@@ -132,10 +128,10 @@ function swapAnnonce(color){
     var annonce = document.getElementById("titleH");
     if(currentColor == 0){
         annonce.innerHTML = "Tour des rouges";
-        annonce.style.color = colorList[0];
+        annonce.style.color = baseColorList[0];
     } else if (currentColor == 1){
         annonce.innerHTML = "Tour des bleus";
-        annonce.style.color = colorList[1];
+        annonce.style.color = baseColorList[1];
     }
 }
 
@@ -207,109 +203,3 @@ function pass(){
     swapAnnonce(currentColor);
 }
 
-//----------------------------------------------------
-
-function callAI(color, ai){
-    //TODO : send distribution to AI
-    // send info
-    if (gameEnded){
-        alert("La partie est terminée"); return;
-    }
-    fetch('/ai3', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({
-            distribution, color, ai
-        })
-    }).then(function (response) {
-        return response.text();
-
-    // result
-    }).then(function (jsonRes) {
-        result = JSON.parse(jsonRes);
-
-        // return result;
-        // insertAIRes(color, result)
-        populateResult(color, result, ai);
-    });
-
-}
-
-// Populate results zone
-// + add global list to store results
-function populateResult(color, result, ai){
-
-    // variables
-    var ai = parseInt(ai);
-    var colorName = "rouge";
-    if (color == 1) colorName = "bleu";
-    var resultsZone = document.getElementById("EmbeddingsZone");
-    var annonce = document.getElementById("EmbeddingsAnnonce");
-    var ol = document.getElementById("olEmbeddings");
-
-    if (ai == 2){
-        resultsZone = document.getElementById("LexicalZone");
-        var annonce = document.getElementById("LexicalAnnonce");
-        var ol = document.getElementById("olLexical");
-    }
-
-    resultsZone.style.backgroundColor = lightColorList[color];
-    // var finalRes = (Object.keys(result[0]).length - 1).toString();
-
-    var time = result[1]
-    annonce.innerHTML = "Indice "+colorName+" en " + time+"s : "+ result[0][0][0]+" - "
-        +result[0][0][2].length + " mot(s)";
-    // annonce.innerHTML = "Indice " + color + " trouvé en " + result[1] + " s : " + " : " + result[0][finalRes][0] + " : " + result[0][finalRes][2].length;
-
-    ol.innerHTML = "";
-    
-    for(var i = 0; i < result.length; i++){
-        if(i >= 5) break;
-        
-    }
-    
-    
-}
-
-function insertAIRes(color, results){
-    
-    for (var i = 0; results.length; i++){
-        result = results[i]
-        createDiv(color, result)
-    }
-}
-
-function createDiv(color, result){
-    elapsedTime = result[1]
-    var colorName = "rouge"
-    if (color == 1) colorName = "bleu"
-
-    // init
-    var AIdiv = document.getElementById("EmbeddingsZone");
-    var newAIRes = document.createElement("div");
-    newAIRes.style.backgroundColor = colorList[color];
-    newAIRes.className = ("hintDiv");
-    
-    // title
-    var title = document.createElement("p");
-    title.innerHTML = "Indice de l'IA " + colorName + " trouvé en " + result[1] + " s : "
-
-    // line
-    var line = document.createElement("span"); line.className = ("activeLine");
-    newAIRes.appendChild(title);
-    // newAIRes.appendChild(line);
-
-    // res without spoil
-    var finalRes = (Object.keys(result[0]).length - 1).toString();
-    var resWithoutSpoil = document.createElement("p");
-    // TODO : add style
-    resWithoutSpoil.innerHTML = result[0][finalRes][0] + " : " + result[0][finalRes][2].length;
-    newAIRes.appendChild(resWithoutSpoil);
-    
-    //TODO : Add every guess with score + function to hide / see
-    
-    // final insert
-    AIdiv.insertBefore(newAIRes, AIdiv.childNodes[0]);
-}

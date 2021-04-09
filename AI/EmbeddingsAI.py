@@ -145,5 +145,6 @@ def get_clue1(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.8, 
     candidates = candidates.sort_values(by=['top'], ascending = False)
     
     # return best_clue, best_score, best_g, candidates
+    allResults.reverse()
     return allResults
 

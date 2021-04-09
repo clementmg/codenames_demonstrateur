@@ -6,17 +6,12 @@
         var rdnLoader = Math.floor(Math.random() * Math.floor(99));
     </script>
     <!-- localhost -->
-    <link rel="stylesheet" href="./static/style.css">
-    <link rel="stylesheet" href="./static/displayAI.css">
-    <link rel="stylesheet" href="./static/displayDetails.css">
-    <script type="text/javascript" src="./static/methods.js"></script>
+    <link rel="stylesheet" href="./static/style/style.css">
+    <link rel="stylesheet" href="./static/style/displayAI.css">
+    <link rel="stylesheet" href="./static/style/displayDetails.css">
+    <script type="text/javascript" src="./static/codenames.js"></script>
+    <script type="text/javascript" src="./static/ai_addon.js"></script>
     <script type="text/javascript" src="./static/wordlist_v2.js"></script>
-
-    <!-- static only -->
-    <!-- <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="displayAI.css">
-    <script type="text/javascript" src="methods.js"></script>
-    <script type="text/javascript" src="wordlist.js"></script> -->
     <meta charset="utf-8" />
     <title>Codenames</title>
 </head>
@@ -29,7 +24,7 @@
                     <h2 id=titleH>Codenames</h3>
                 </div>
                 <div class="headerMember">
-                    <input type="button" onclick="newGame()" value="New Game" class="btnStyle"> 
+                    <input type="button" onclick="resetGame(); newGame()" value="New Game" class="btnStyle"> 
                 </div>
             </div>
             <!-- Grid Game -->
@@ -48,36 +43,37 @@
             <div class = "AIdiv hidden"> <!-- Embeddings AI -->
                 <div class = "AImenu">
                     <p class="pAI">Embeddings AI</p>
-                    <input type="button" onclick="callAI(0, '1')" value="Red AI" class="btnRed">
-                    <input type="button" onclick="callAI(1, '1')" value="Blue AI" class="btnBlue">
+                    <input type="button" onclick="callAI(0, '1')" value="Red AI" class="btnRed btnToDisable">
+                    <input type="button" onclick="callAI(1, '1')" value="Blue AI" class="btnBlue btnToDisable">
                 </div>
                 <span class="line hidden"></span>
                 <div id="EmbeddingsZone">
                     <div class = "AnnonceDiv">
-                        <p id="EmbeddingsAnnonce" class="Annonce" ></p>
-                        <input type="button" value="Spoil" class= "buttonAnnonce">
+                        <p id="EmbeddingsAnnonce" class="Annonce" >Utiliser les boutons ci-dessus pour demander un indice à l'IA</p>
+                        <input id="spoilEm" type="button" onclick="spoil(0)" value="Spoil" class= "buttonAnnonce">
                     </div>
-                    <div id="EmbeddingsDetails">
-                        <ol id = "olEmbeddings">
-                        </ol>
+                    <div class = "details">
+                        <ol id = "olEmbeddings" class = "reset"></ol>
+                        <ul id = "olInfoEmbeddings" class = "reset"></ul>
                     </div>
                 </div>
             </div>
             <div class = "AIdiv hidden"> <!-- Lexical AI -->
                 <div class = "AImenu">
                     <p class="pAI">Lexical AI</p>
-                    <input type="button" onclick="callAI(0, '2')" value="Red AI" class="btnRed">
-                    <input type="button" onclick="callAI(1, '2')" value="Blue AI" class="btnBlue">
+                    <input type="button" onclick="callAI(0, '2')" value="Red AI" class="btnRed btnToDisable">
+                    <input type="button" onclick="callAI(1, '2')" value="Blue AI" class="btnBlue btnToDisable">
                 </div>
                 <span class="line hidden"></span>
                 <div id="LexicalZone">
                     <div class = "AnnonceDiv">
-                        <p id="LexicalAnnonce" class="Annonce" ></p>
-                        <input type="button" value="Spoil" class= "buttonAnnonce">
+                        <p id="LexicalAnnonce" class="Annonce" >Utiliser les boutons ci-dessus pour demander un indice à l'IA</p>
+                        <input type="button">
+                        <input id="spoilLex" type="button" onclick="spoil(1)" value="Spoil" class= "buttonAnnonce">
                     </div>
-                    <div id="LexicalDetails">
-                        <ol id = "olLexical">
-                        </ol>
+                    <div class = "details">
+                        <ol id = "olLexical" class = "reset"></ol>
+                        <ul id = "olInfoLexical" class = "reset"></ul>
                     </div>
                 </div>
             </div>
