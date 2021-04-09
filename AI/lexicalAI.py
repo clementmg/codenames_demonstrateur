@@ -17,7 +17,7 @@ with open("database/wordlist.pkl", "rb") as f:
 with open("database/word_lexicals.pkl", "rb") as f:
     texts = pickle.load(f)
     
-nlp = spacy.load("fr_core_news_md")
+nlp = spacy.load("fr_core_news_lg")
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import pairwise

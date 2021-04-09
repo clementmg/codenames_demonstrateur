@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import pandas as pd
 
-nlp = spacy.load("fr_core_news_md")
+nlp = spacy.load("fr_core_news_lg")
 
 from nltk import PorterStemmer
 st = PorterStemmer()
