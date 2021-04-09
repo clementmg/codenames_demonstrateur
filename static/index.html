@@ -2,9 +2,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-        var rdnLoader = Math.floor(Math.random() * Math.floor(99));
-    </script>
     <!-- localhost -->
     <link rel="stylesheet" href="./static/style/style.css">
     <link rel="stylesheet" href="./static/style/displayAI.css">
@@ -50,6 +47,8 @@
                 <div id="EmbeddingsZone">
                     <div class = "AnnonceDiv">
                         <p id="EmbeddingsAnnonce" class="Annonce" >Utiliser les boutons ci-dessus pour demander un indice à l'IA</p>
+                        <input type="button" onclick="nav(1, -1)" value="<" class="navBtn emNav">
+                        <input type="button" onclick="nav(1, 1)" value=">" class="navBtn emNav">
                         <input id="spoilEm" type="button" onclick="spoil(0)" value="Spoil" class= "buttonAnnonce">
                     </div>
                     <div class = "details">
@@ -68,7 +67,8 @@
                 <div id="LexicalZone">
                     <div class = "AnnonceDiv">
                         <p id="LexicalAnnonce" class="Annonce" >Utiliser les boutons ci-dessus pour demander un indice à l'IA</p>
-                        <input type="button">
+                        <input type="button" onclick="nav(2, -1)" value="<" class="navBtn lexNav">
+                        <input type="button" onclick="nav(2, 1)" value=">" class="navBtn lexNav">
                         <input id="spoilLex" type="button" onclick="spoil(1)" value="Spoil" class= "buttonAnnonce">
                     </div>
                     <div class = "details">

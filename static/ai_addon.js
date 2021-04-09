@@ -5,9 +5,11 @@ var EmbeddingsTime = [];
 var EmbeddingsWordsNb = [];
 var LexicalTime = [];
 var LexicalWordsNb = [];
+var CurrentEmTab = 0;
+var CurrentLexTab = 0;
 
-var colorList = ["lightcoral", "lightblue", "Linen", "DimGrey"]
-var lightColorList = ["lightcoral", "lightblue"]
+var colorList = ["lightcoral", "lightblue", "Linen", "DimGrey"];
+var lightColorList = ["lightcoral", "lightblue"];
 
 // reset memory and display with new game
 function resetGame(){
@@ -18,6 +20,8 @@ function resetGame(){
     EmbeddingsWordsNb = [];
     LexicalTime = [];
     LexicalWordsNb = [];
+    CurrentEmTab = 0;
+    CurrentLexTab = 0;
     var emAnnonce = document.getElementsByClassName("Annonce");
     for (var i = 0; i < emAnnonce.length; i++){
         emAnnonce[i].innerHTML = "Utiliser les boutons ci-dessus pour demander un indice à l'IA.";
@@ -41,6 +45,11 @@ function resetGame(){
     for (var i = 0; i < details.length; i++){
         details[i].style.display = 'none';
     }
+
+    var navBtn = document.getElementsByClassName("navBtn");
+    for (var i = 0; i < navBtn.length; i++){
+        navBtn[i].style.display = 'none';
+    }
 }
 
 function spoil(ai){
@@ -56,7 +65,7 @@ function spoil(ai){
     } else{
         alert("Error"); return;
     }
-    
+
     if (btn.value == 'Spoil'){
         detailsZone.style.display = 'block';
         btn.value = 'Hide';
@@ -65,7 +74,32 @@ function spoil(ai){
         detailsZone.style.display = 'none';
         btn.value = 'Spoil';
     }
-    
+}
+
+function nav(ai, dir){
+    // alert(ai);
+    var res = [];
+    var CurrentTab = 0;
+    if (ai == 1){
+        res = EmbeddingsRes;
+        CurrentTab = CurrentEmTab;
+    }
+    else if (ai == 2){
+        res = LexicalRes; 
+        CurrentTab = CurrentLexTab;
+    } 
+    if ((CurrentTab + dir) < res.length){
+        var index = CurrentTab + dir;
+        var color = res[index][1];
+        var result = res[index][0];
+        populateResult(color, result, ai.toString(), save = false);
+        if (ai == 1){
+            CurrentEmTab = index;
+        }
+        else if (ai == 2){
+            CurrentLexTab = index;
+        } 
+    }
 }
 
 // ---------- AI communication
@@ -101,10 +135,10 @@ function callAI(color, ai){
 }
 
 // Populate results zone
-function populateResult(color, result, ai){
+function populateResult(color, result, ai, save = true){
     // memory save
+    if (save){memorySave(result, ai, color);}
     var ai = parseInt(ai);
-    memorySave(result, ai);
 
     // variables
     var colorName = "rouge";
@@ -154,6 +188,13 @@ function populateResult(color, result, ai){
     var btnsSpoil = document.getElementsByClassName('buttonAnnonce');
     btnsSpoil[ai - 1].style.display = 'block';
 
+    var navBtn = document.getElementsByClassName("navBtn");
+    if (ai == 1) var navBtn = document.getElementsByClassName("emNav");
+    else if (ai == 2) var navBtn = document.getElementsByClassName("lexNav");
+    for (var i = 0; i < navBtn.length; i++){
+        navBtn[i].style.display = 'block';
+    }
+
     // enable buttons 
     var btnToDisable = document.getElementsByClassName('btnToDisable');
     for (var i = 0; i < btnToDisable.length; i++){
@@ -162,19 +203,21 @@ function populateResult(color, result, ai){
 }
 
 //save info to be reused
-function memorySave(result, ai){
+function memorySave(result, ai, color){
     var newTime = parseFloat(result[1]);
     var wordNb = parseFloat(result[0][0][2].length);
     if (ai == 1){
-        EmbeddingsRes.push(result);
+        EmbeddingsRes.push([result, color]);
         EmbeddingsTime.push((newTime));
         EmbeddingsWordsNb.push((wordNb));
+        CurrentEmTab = EmbeddingsTime.length - 1;
         return;
     }
     else if (ai == 2){
-        LexicalRes.push(result);
+        LexicalRes.push([result, color]);
         LexicalTime.push((newTime));
         LexicalWordsNb.push((wordNb));
+        CurrentLexTab = LexicalTime.length - 1;
     } return;
 }
 
