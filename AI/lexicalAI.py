@@ -114,7 +114,8 @@ def calculate_clue_score(clue, pos, neu, agg, df, min_words_to_find):
 
     return real_score, word_indices
 
-def get_clue2(pos_words, neg_words, neu_words, assassin_word, danger_coeff=1.2, agg=0.02, given_indices=[]):
+# Base : danger = 1.2, agg = 0.02  |  Demo : danger = 3, agg = 0.1
+def get_clue2(pos_words, neg_words, neu_words, assassin_word, danger_coeff=3, agg=0.1, given_indices=[]):
     
     # ----- Results to be sent to front
     results = []
