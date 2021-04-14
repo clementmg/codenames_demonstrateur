@@ -20,12 +20,14 @@ def callAi():
         distribution = json_msg['distribution']
         color = json_msg['color']
         ai = json_msg['ai']
+        agg = json_msg['agg']
+        danger = json_msg['danger']
         print("------------ Called for color : ", getColorName(color))
         word_to_guess, enemy_words, neutral, assassin = getWords(distribution, color)
 
         # Create message to be returned
         allResults = "error"
-        allResults = AI_manager(ai, word_to_guess, enemy_words, neutral, assassin)
+        allResults = AI_manager(ai, word_to_guess, enemy_words, neutral, assassin, agg, danger)
         print("================= Information sent =================")
         print(allResults[0])
         return json.dumps(allResults[0],  separators=(',', ':'))
@@ -37,4 +39,5 @@ def callAi():
 
 if __name__ == "__main__":
     app.run()
-
+    
+    

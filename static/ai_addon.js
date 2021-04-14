@@ -8,12 +8,18 @@ var LexicalWordsNb = [];
 var CurrentEmTab = 0;
 var CurrentLexTab = 0;
 
+//hyperparameters
+var emAgg = 0.1;
+var emDanger = 3;
+var lexAgg = 0.1;
+var lexDanger = 3;
+
 var colorList = ["lightcoral", "lightblue", "Linen", "DimGrey"];
 var lightColorList = ["lightcoral", "lightblue"];
 
 // reset memory and display with new game
 function resetGame(){
-
+    updateDisplayValue();
     EmbeddingsRes = [];
     LexicalRes = [];
     EmbeddingsTime = [];
@@ -111,6 +117,11 @@ function callAI(color, ai){
     for (var i = 0; i < btnToDisable.length; i++){
         btnToDisable[i].disabled = true;
     }
+    ai = parseInt(ai);
+    agg = 0;
+    danger = 0;
+    if( ai == 1){ agg = emAgg; danger = emDanger;}
+    else if (ai = 2){ agg = lexAgg; danger = lexDanger;}
     
     if (gameEnded){
         alert("La partie est terminée"); return;
@@ -121,7 +132,7 @@ function callAI(color, ai){
         },
         method: 'POST',
         body: JSON.stringify({
-            distribution, color, ai
+            distribution, color, ai, agg, danger
         })
     }).then(function (response) {
         return response.text();
@@ -253,4 +264,31 @@ function getMean(ai, info){
     }
     res = tamp/d;
     return Number(res.toFixed(2));
+}
+
+// update hyperparameters
+function updateParams(){
+    emAgg = document.getElementById("emAgg").value;
+    emDanger = document.getElementById("emDanger").value;
+    lexAgg = document.getElementById("lexAgg").value;
+    lexDanger = document.getElementById("lexDanger").value;
+}
+
+function resetParams(){
+    emAgg = 0.1;
+    emDanger = 3;
+    lexAgg = 0.1;
+    lexDanger = 3;
+    updateDisplayValue();
+}
+
+function updateDisplayValue(){
+    var newEmAgg = document.getElementById("emAgg");
+    var newEmDanger = document.getElementById("emDanger");
+    var newLexAgg = document.getElementById("lexAgg");
+    var newLexDanger = document.getElementById("lexDanger");
+    newEmAgg.value = emAgg;
+    newEmDanger.value = emDanger;
+    newLexAgg.value = lexAgg;
+    newLexDanger.value = lexDanger;
 }

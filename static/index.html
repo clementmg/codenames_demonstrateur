@@ -5,13 +5,45 @@
     <link rel="stylesheet" href="./static/style/style.css">
     <link rel="stylesheet" href="./static/style/displayAI.css">
     <link rel="stylesheet" href="./static/style/displayDetails.css">
+    <link rel="stylesheet" href="./static/style/popup.css">
     <script type="text/javascript" src="./static/codenames.js"></script>
     <script type="text/javascript" src="./static/ai_addon.js"></script>
     <script type="text/javascript" src="./static/wordlist_v2.js"></script>
+    <script defer src="./static/popup.js"></script>
     <meta charset="utf-8" />
     <title>Codenames</title>
 </head>
 <body>
+    <!-- Popup setup parameters -->
+    <div class="modal" id="modal">
+        <div class="modal-header">
+        <div class="title">Hyperparameters</div>
+        <input type="button" onclick="resetParams()" value="Reset Parameters">
+        <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="title2">Embeddings AI</div>
+            <div id="emParams"class="justify">
+                <label for="emAgg" >Aggressivity : </label>
+                <input name="emAgg" id="emAgg" type="number" onchange="updateParams()" 
+                    class="input" step="0.01" min="0" max="10" value="0.3">
+                <label for="emDanger">Danger coefficient : </label>
+                <input name="emDanger" id="emDanger" type="number" onchange="updateParams()" 
+                    class="input" step="0.1" min="0" max="10">
+            </div>
+            <div class="title2" id="lexTitle2">Lexical AI</div>
+            <div id="lexParams" class="justify">
+                <label for="lexAgg">Aggressivity : </label>
+                <input name="lexAgg" id="lexAgg" type="number" onchange="updateParams()" 
+                    class="input" step="0.01" min="0" max="10" value="0.3">
+                <label for="lexDanger">Danger coefficient : </label>
+                <input name="lexDanger" id="lexDanger" type="number" onchange="updateParams()" 
+                    class="input" step="0.1" min="0" max="10">
+            </div>
+        </div>
+    </div>
+    <div id="overlay"></div>
+    <!-- Codenames game -->
     <div id="mainDiv">
         <div id = "gameDiv" >
             <!-- Header part -->
@@ -35,9 +67,11 @@
                 </div>
             </div>
         </div> <!-- End gameDiv -->
+        <!-- AI addon -->
         <div id = "AIcontainer"> <!-- AI div -->
             <div class = "AIdiv hidden"> <!-- Embeddings AI -->
                 <div class = "AImenu">
+                    <button id="paramsBtn" data-modal-target="#modal" >Params</button>
                     <p class="pAI">Embeddings AI</p>
                     <input type="button" onclick="callAI(0, '1')" value="Red AI" class="btnRed btnToDisable">
                     <input type="button" onclick="callAI(1, '1')" value="Blue AI" class="btnBlue btnToDisable">
